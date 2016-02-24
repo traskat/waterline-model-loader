@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --check-leaks --recursive",
     "cover": "istanbul --include-all-sources cover --root lib _mocha -R --spec -- --recursive",
-    "ci": "npm run lint && npm run cover"
+    "ci": "npm run cover"
   },
   "author": "Arjan Frans <arjanfrans.com@gmail.com>",
   "license": "MIT",
