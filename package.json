@@ -6,15 +6,10 @@
   "scripts": {
     "test": "mocha --check-leaks --recursive",
     "cover": "istanbul --include-all-sources cover --root lib _mocha -R --spec -- --recursive",
-    "ci": "npm run lint && npm run cover",
-    "lint": "eslint lib"
+    "ci": "npm run lint && npm run cover"
   },
   "author": "Arjan Frans <arjanfrans.com@gmail.com>",
   "license": "MIT",
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/arjanfrans/waterline-model-loader"
@@ -26,13 +21,9 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.6",
-    "eslint": "^2.2.0",
-    "eslint-config-airbnb": "^6.0.2",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0",
-    "nodemon": "^1.9.0",
-    "pre-commit": "^1.1.2",
     "sails-memory": "^0.10.6"
   }
 }
