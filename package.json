@@ -1,6 +1,6 @@
 {
   "name": "waterline-model-loader",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Load Waterline models from a directory",
   "main": "lib/index.js",
   "scripts": {
