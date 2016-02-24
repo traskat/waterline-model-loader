@@ -20,6 +20,7 @@ npm install --save waterline-model-loader
 Create a directory where your models live. The files are loaded recursively, however the name of
 the model files must be unique.
 
+Model example:
 ```javascript
 // ./models/Example.js
 
@@ -34,6 +35,7 @@ module.exports = {
 };
 ```
 
+Usage example:
 ```javascript
 const path = require('path');
 const modelLoader = require('waterline-model-loader');
