@@ -16,11 +16,11 @@
   },
   "dependencies": {
     "recursive-readdir": "^1.3.0",
-    "waterline": "^0.11.0"
+    "waterline": "^0.12.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "coveralls": "^2.11.6",
+    "coveralls": "^2.11.9",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0",
