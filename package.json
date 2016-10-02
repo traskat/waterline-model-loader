@@ -15,14 +15,14 @@
     "url": "https://github.com/arjanfrans/waterline-model-loader"
   },
   "dependencies": {
-    "recursive-readdir": "^2.0.0",
-    "waterline": "^0.12.1"
+    "recursive-readdir": "^2.1.0",
+    "waterline": "^0.12.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "coveralls": "^2.11.9",
-    "istanbul": "^0.4.3",
-    "mocha": "^2.4.5",
-    "sails-memory": "^0.10.6"
+    "coveralls": "^2.11.14",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.0",
+    "sails-memory": "^0.10.7"
   }
 }
