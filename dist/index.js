@@ -1,8 +1,8 @@
 import Waterline from 'waterline';
-import path from 'path';
 import recursive from 'recursive-readdir';
+import path from 'path';
 
-function recursiveModules (dir) {
+function recursiveModules(dir) {
     return new Promise(function (resolve, reject) {
         recursive(dir, ['!*.js', '^\\.'], function (err, files) {
             if (err) {
@@ -14,7 +14,7 @@ function recursiveModules (dir) {
     });
 }
 
-function initializeOrm (modelNameMapping, orm, connections) {
+function initializeOrm(modelNameMapping, orm, connections) {
     return new Promise((resolve, reject) => {
         return orm.initialize(connections, function (err, models) {
             if (err) {
@@ -23,7 +23,7 @@ function initializeOrm (modelNameMapping, orm, connections) {
 
             const modelMapping = {};
 
-            Object.keys(models.collections).forEach((collectionName) => {
+            Object.keys(models.collections).forEach(collectionName => {
                 modelMapping[modelNameMapping[collectionName]] = models.collections[collectionName];
             });
 
@@ -32,7 +32,7 @@ function initializeOrm (modelNameMapping, orm, connections) {
     });
 }
 
-function loadModels (modelsDir, orm, connections) {
+function loadModels(modelsDir, orm, connections) {
     const defaultConnection = connections.defaults ? connections.defaults.connection : null;
     const modelNameMapping = {};
 
@@ -82,13 +82,13 @@ let _orm = null;
 let _models = null;
 
 const ModelLoader = {
-    get _orm () {
+    get _orm() {
         return _orm;
     },
-    get models () {
+    get models() {
         return _models;
     },
-    setup (config) {
+    setup: function (config) {
         if (!config) {
             return Promise.reject(new Error('No configuration given'));
         }
@@ -112,19 +112,19 @@ const ModelLoader = {
             return _models;
         });
     },
-    teardown () {
+    teardown: function () {
         if (!_orm) {
             return Promise.reject(new Error('Waterline ORM is not setup'));
         }
 
         const adapterTeardowns = [];
 
-        Object.keys(_orm.connections).forEach((name) => {
+        Object.keys(_orm.connections).forEach(name => {
             const adapter = _orm.connections[name]._adapter;
 
             if (adapter.teardown) {
                 adapterTeardowns.push(new Promise((resolve, reject) => {
-                    adapter.teardown(null, (err) => {
+                    adapter.teardown(null, err => {
                         if (err) {
                             return reject(err);
                         }

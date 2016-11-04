@@ -1,4 +1,6 @@
-const modelLoader = require('../lib/');
+require('babel-register')
+
+const modelLoader = require('../src/').default;
 
 module.exports = function () {
     const Example = modelLoader.models.Example;

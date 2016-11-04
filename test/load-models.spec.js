@@ -1,24 +1,21 @@
-'use strict';
-
-const modelLoader = require('../src/index');
-const chai = require('chai');
-const path = require('path');
-const expect = chai.expect;
-const connections = require('./connections');
+import ModelLoader from '../src'
+import { expect } from 'chai';
+import path from 'path';
+import connections from './connections';
 
 describe('waterline model loader', function () {
     context('initial properties', () => {
         it('_orm and models are null', () => {
-            expect(modelLoader).to.have.property('_orm');
-            expect(modelLoader).to.have.property('models');
-            expect(modelLoader._orm).to.equal(null);
-            expect(modelLoader.models).to.equal(null);
+            expect(ModelLoader).to.have.property('_orm');
+            expect(ModelLoader).to.have.property('models');
+            expect(ModelLoader._orm).to.equal(null);
+            expect(ModelLoader.models).to.equal(null);
         });
     });
 
     context('teardown without setup', () => {
         it('throws an error', done => {
-            modelLoader.teardown().then(() => {
+            ModelLoader.teardown().then(() => {
                 expect.fail();
 
                 return done();
@@ -37,7 +34,7 @@ describe('waterline model loader', function () {
                 connections: connections
             };
 
-            modelLoader.setup(config).then(models => {
+            ModelLoader.setup(config).then(models => {
                 loadedModels = models;
 
                 return done();
@@ -45,8 +42,8 @@ describe('waterline model loader', function () {
         });
 
         it('_orm and models are not null', () => {
-            expect(modelLoader._orm).to.not.equal(null);
-            expect(modelLoader.models).to.equal(loadedModels);
+            expect(ModelLoader._orm).to.not.equal(null);
+            expect(ModelLoader.models).to.equal(loadedModels);
         });
 
         it('Waterline models are loaded', () => {
@@ -57,11 +54,11 @@ describe('waterline model loader', function () {
         });
 
         it('teardown', done => {
-            let orm = modelLoader._orm;
+            let orm = ModelLoader._orm;
 
-            modelLoader.teardown().then(() => {
-                expect(modelLoader._orm).to.equal(null);
-                expect(modelLoader.models).to.equal(null);
+            ModelLoader.teardown().then(() => {
+                expect(ModelLoader._orm).to.equal(null);
+                expect(ModelLoader.models).to.equal(null);
 
                 return done();
             }).catch(done);

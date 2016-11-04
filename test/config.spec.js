@@ -1,11 +1,8 @@
-'use strict';
-
-const modelLoader = require('../src/index');
-const chai = require('chai');
-const path = require('path');
-const expect = chai.expect;
-const validConnections = require('./connections');
-const memoryAdapter = require('sails-memory');
+import ModelLoader from '../src'
+import { expect } from 'chai';
+import path from 'path';
+import validConnections from './connections';
+import memoryAdapter from 'sails-memory';
 
 describe('config arguments', function () {
     it('missing modelsDir', done => {
@@ -13,7 +10,7 @@ describe('config arguments', function () {
             connections: validConnections
         };
 
-        modelLoader.setup(config).then(models => {
+        ModelLoader.setup(config).then(models => {
             expect.fail();
         }).catch(err => {
             expect(err.message).to.equal('No "modelsDir" configuration given');
@@ -25,7 +22,7 @@ describe('config arguments', function () {
             modelsDir: path.join(__dirname, 'models')
         };
 
-        modelLoader.setup(config).then(models => {
+        ModelLoader.setup(config).then(models => {
             expect.fail();
         }).catch(err => {
             expect(err.message).to.equal('No "connections" configuration given');
@@ -38,7 +35,7 @@ describe('config arguments', function () {
             modelsDir: path.join(__dirname, 'models-bad')
         };
 
-        modelLoader.setup(config).then(models => {
+        ModelLoader.setup(config).then(models => {
             expect.fail();
         }).catch(err => {
             expect(err.message.startsWith('ENOENT: no such file or dir')).to.equal(true);
@@ -51,7 +48,7 @@ describe('config arguments', function () {
             modelsDir: path.join(__dirname, 'models')
         };
 
-        modelLoader.setup(config).then(models => {
+        ModelLoader.setup(config).then(models => {
             expect.fail();
         }).catch(err => {
             expect(err.message).to.equal('Options object must contain an adapters object');
@@ -59,7 +56,7 @@ describe('config arguments', function () {
     });
 
     it('no config given', done => {
-        modelLoader.setup().then(models => {
+        ModelLoader.setup().then(models => {
             expect.fail();
         }).catch(err => {
             expect(err.message).to.equal('No configuration given');
@@ -82,7 +79,7 @@ describe('config arguments', function () {
             }
         };
 
-        modelLoader.setup(config).then(models => {
+        ModelLoader.setup(config).then(models => {
             expect.fail();
         }).catch(err => {
             expect(err.message.startsWith('Unknown adapter "memory" for conn')).to.equal(true);

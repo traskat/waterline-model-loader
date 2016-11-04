@@ -2,12 +2,14 @@
   "name": "waterline-model-loader",
   "version": "0.2.3",
   "description": "Load Waterline models from a directory",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --check-leaks --recursive",
-    "cover": "istanbul --include-all-sources cover --root lib _mocha -R --spec -- --recursive",
-    "ci": "npm run cover && npm run lint",
-    "lint": "eslint src"
+      "test": "mocha --compilers js:babel-register --recursive --check-leaks --colors ",                                    
+      "prepublish": "babel -d dist/ src/",                                                                                  
+      "test:watch": "npm test -- --watch",                                                                                  
+      "cover": "nyc mocha --require babel-register",                                                                        
+      "ci": "npm run cover && npm run lint",                                                                                                
+      "lint": "eslint src"                                                                                           
   },
   "author": "Arjan Frans <arjanfrans.com@gmail.com>",
   "license": "MIT",
@@ -21,10 +23,15 @@
   },
   "devDependencies": {
     "@arjanfrans/eslint-config-arjanfrans": "0.0.5",
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
+    "nyc": "^8.4.0",
     "sails-memory": "^0.10.7"
   }
 }

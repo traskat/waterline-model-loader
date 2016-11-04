@@ -1,7 +1,7 @@
-'use strict';
+require('babel-register')
 
 const path = require('path');
-const modelLoader = require('../lib/');
+const modelLoader = require('../src/').default;
 const memoryAdapter = require('sails-memory');
 const singletonTest = require('./singleton');
 
