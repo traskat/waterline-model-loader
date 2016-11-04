@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --check-leaks --recursive",
     "cover": "istanbul --include-all-sources cover --root lib _mocha -R --spec -- --recursive",
-    "ci": "npm run cover"
+    "ci": "npm run cover && npm run lint",
+    "lint": "eslint src"
   },
   "author": "Arjan Frans <arjanfrans.com@gmail.com>",
   "license": "MIT",
@@ -19,6 +20,7 @@
     "waterline": "^0.12.2"
   },
   "devDependencies": {
+    "@arjanfrans/eslint-config-arjanfrans": "0.0.5",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
     "istanbul": "^0.4.5",

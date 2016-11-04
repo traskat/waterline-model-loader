@@ -1,6 +1,6 @@
 'use strict';
 
-const modelLoader = require('../lib/index');
+const modelLoader = require('../src/index');
 const chai = require('chai');
 const path = require('path');
 const expect = chai.expect;

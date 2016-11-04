@@ -1,10 +1,8 @@
-'use strict';
-
 const Waterline = require('waterline');
 const recursive = require('recursive-readdir');
 const path = require('path');
 
-function recursiveModules(dir) {
+function recursiveModules (dir) {
     return new Promise(function (resolve, reject) {
         recursive(dir, ['!*.js', '^\\.'], function (err, files) {
             if (err) {
@@ -16,14 +14,14 @@ function recursiveModules(dir) {
     });
 }
 
-function initializeOrm(modelNameMapping, orm, connections) {
+function initializeOrm (modelNameMapping, orm, connections) {
     return new Promise((resolve, reject) => {
         return orm.initialize(connections, function (err, models) {
             if (err) {
                 return reject(err);
             }
 
-            let modelMapping = {};
+            const modelMapping = {};
 
             Object.keys(models.collections).forEach((collectionName) => {
                 modelMapping[modelNameMapping[collectionName]] = models.collections[collectionName];
@@ -34,15 +32,15 @@ function initializeOrm(modelNameMapping, orm, connections) {
     });
 }
 
-function loadModels(modelsDir, orm, connections) {
+function loadModels (modelsDir, orm, connections) {
     const defaultConnection = connections.defaults ? connections.defaults.connection : null;
     const modelNameMapping = {};
 
     if (typeof modelsDir === 'string') {
         return recursiveModules(modelsDir).then(modelFiles => {
-            for (let modelFile of modelFiles) {
-                let modelName = path.basename(modelFile, '.js');
-                let modelDefinition = require(modelFile);
+            for (const modelFile of modelFiles) {
+                const modelName = path.basename(modelFile, '.js');
+                const modelDefinition = require(modelFile); // eslint-disable-line global-require
 
                 modelDefinition.identity = modelName.toLowerCase();
 
@@ -52,7 +50,7 @@ function loadModels(modelsDir, orm, connections) {
 
                 modelNameMapping[modelDefinition.identity] = modelName;
 
-                let model = Waterline.Collection.extend(modelDefinition);
+                const model = Waterline.Collection.extend(modelDefinition);
 
                 orm.loadCollection(model);
             }
@@ -71,7 +69,7 @@ function loadModels(modelsDir, orm, connections) {
 
             modelNameMapping[modelDefinition.identity] = modelName;
 
-            let model = Waterline.Collection.extend(modelDefinition);
+            const model = Waterline.Collection.extend(modelDefinition);
 
             orm.loadCollection(model);
         }
@@ -103,7 +101,7 @@ module.exports = {
             return Promise.reject(new Error('No "modelsDir" configuration given'));
         }
 
-        let orm = new Waterline();
+        const orm = new Waterline();
 
         return loadModels(config.modelsDir, orm, config.connections).then(modelNameMapping => {
             return initializeOrm(modelNameMapping, orm, config.connections);
@@ -119,10 +117,10 @@ module.exports = {
             return Promise.reject(new Error('Waterline ORM is not setup'));
         }
 
-        let adapterTeardowns = [];
+        const adapterTeardowns = [];
 
         Object.keys(_orm.connections).forEach((name) => {
-            let adapter = _orm.connections[name]._adapter;
+            const adapter = _orm.connections[name]._adapter;
 
             if (adapter.teardown) {
                 adapterTeardowns.push(new Promise((resolve, reject) => {
