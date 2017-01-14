@@ -38,7 +38,7 @@ module.exports = {
 Usage example:
 ```javascript
 const path = require('path');
-const modelLoader = require('waterline-model-loader');
+const modelLoader = require('waterline-model-loader').default;
 
 let config = {
     modelsDir: path.join(__dirname, './models'),
